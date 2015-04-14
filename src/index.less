@@ -1,0 +1,38 @@
+@import "opacity.less";
+
+
+.modal{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+
+  .modal-backdrop{
+    .opacity(0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #000;
+  }
+  .modal-dialog{
+    position: relative;
+    width: 75%;
+    min-width: 320px;
+    margin: 128px auto 0;
+    .modal-content{
+      position: relative;
+      .close{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        z-index: 10000;
+      }
+    }
+  }
+}

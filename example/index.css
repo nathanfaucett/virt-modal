@@ -1,0 +1,43 @@
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+.modal .modal-backdrop {
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+  filter: alpha(opacity=50);
+  -webkit-opacity: 0.5;
+  -moz-opacity: 0.5;
+  -o-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #000;
+}
+.modal .modal-dialog {
+  position: relative;
+  width: 75%;
+  min-width: 320px;
+  margin: 128px auto 0;
+}
+.modal .modal-dialog .modal-content {
+  position: relative;
+}
+.modal .modal-dialog .modal-content .close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10000;
+}
+.modal .modal-dialog .modal-content {
+  background: #fff;
+}
