@@ -1,7 +1,7 @@
 @import "opacity.less";
 
 
-.modal{
+.Modal{
   position: absolute;
   top: 0;
   right: 0;
@@ -12,7 +12,7 @@
   -webkit-overflow-scrolling: touch;
   outline: 0;
 
-  .modal-backdrop{
+  .Modal-backdrop{
     .opacity(0.5);
     position: fixed;
     top: 0;
@@ -20,14 +20,14 @@
     left: 0;
     background-color: #000;
   }
-  .modal-dialog{
+  .Modal-dialog{
     position: relative;
     width: 75%;
     min-width: 320px;
     margin: 128px auto 0;
-    .modal-content{
+    .Modal-content{
       position: relative;
-      .close{
+      .Modal-close{
         position: absolute;
         top: 0px;
         right: 0px;

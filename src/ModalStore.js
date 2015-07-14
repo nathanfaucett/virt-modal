@@ -31,6 +31,11 @@ function create(options) {
     modal.data = options.data;
     modal.size = isString(options.size) ? " " + options.size : " md";
     modal.className = isString(options.className) ? " " + options.className : "";
+    modal.style = options.modalStyle;
+    modal.backdropStyle = options.modalBackdrop;
+    modal.dialogStyle = options.modalDialog;
+    modal.contentStyle = options.modalContent;
+
     modals[index] = modal;
 }
 
@@ -54,8 +59,8 @@ ModalStore.fromJSON = function(json) {
     _modals = json;
 };
 
-ModalStore.all = function() {
-    return _modals.slice();
+ModalStore.all = function(callback) {
+    callback(undefined, _modals.slice());
 };
 
 ModalStore.addChangeListener = function(callback) {

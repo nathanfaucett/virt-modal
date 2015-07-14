@@ -15,7 +15,7 @@
     "virt-modal.js"
   ],
   "scripts": {
-    "example": "comn -f example/src/index.js -o example/index.js && comn_css -f example/css/index.less -o example/index.css -l"
+    "example": "comn -f example/src/index.js -o example/index.js"
   },
   "author": "Nathan Faucett",
   "license": "BSD-2-Clause",
@@ -26,10 +26,11 @@
     "grunt-jsbeautifier": "^0.2.7"
   },
   "dependencies": {
+    "css": "git://github.com/nathanfaucett/css.git",
     "environment": "git://github.com/nathanfaucett/environment",
     "event_emitter": "git://github.com/nathanfaucett/event_emitter",
     "event_listener": "git://github.com/nathanfaucett/event_listener",
-    "extend": "git://github.com/nathanfaucett/extend",
+    "extend": "git://github.com/nathanfaucett/extend.git",
     "filter_one": "git://github.com/nathanfaucett/filter_one",
     "index_of": "git://github.com/nathanfaucett/index_of",
     "is_function": "git://github.com/nathanfaucett/is_function",

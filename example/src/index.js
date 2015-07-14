@@ -23,6 +23,9 @@ function renderApp() {
                 }
             }, "Open Modal"),
             virt.createView(modal.Modals, {
+                modalContent: {
+                    backgroundColor: "#fff"
+                },
                 modals: {
                     modal: {
                         name: "modal",
@@ -34,8 +37,15 @@ function renderApp() {
                                 }
                             });
                         },
-                        render: function() {
-                            return virt.createView("h1", "hello world!");
+                        render: function(modal) {
+                            return (
+                                virt.createView("div",
+                                    virt.createView("h1", "hello world!"),
+                                    virt.createView("a", {
+                                        onClick: modal.close
+                                    }, "X")
+                                )
+                            )
                         }
                     }
                 }

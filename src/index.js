@@ -1,6 +1,6 @@
 var modal = exports;
 
 
-modal.Modal = require("./modal");
-modal.Modals = require("./modals");
-modal.ModalStore = require("./modal_store");
+modal.Modal = require("./Modal");
+modal.Modals = require("./Modals");
+modal.ModalStore = require("./ModalStore");
