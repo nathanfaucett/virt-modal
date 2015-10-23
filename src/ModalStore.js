@@ -31,10 +31,9 @@ function create(options) {
     modal.data = options.data;
     modal.size = isString(options.size) ? " " + options.size : " md";
     modal.className = isString(options.className) ? " " + options.className : "";
-    modal.style = options.modalStyle;
-    modal.backdropStyle = options.modalBackdrop;
-    modal.dialogStyle = options.modalDialog;
-    modal.contentStyle = options.modalContent;
+    modal.style = options.style;
+    modal.backdrop = options.backdrop;
+    modal.dialog = options.dialog;
 
     modals[index] = modal;
 }

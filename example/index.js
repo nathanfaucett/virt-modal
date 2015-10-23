@@ -7898,6 +7898,7 @@ ModalPrototype.getStyles = function() {
         };
 
     css.opacity(styles.modalBackdrop, 0.5);
+    css.transition(styles.root, "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms");
 
     return styles;
 };

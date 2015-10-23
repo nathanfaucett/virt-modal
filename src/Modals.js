@@ -98,10 +98,9 @@ ModalsPrototype.render = function() {
                         size: modal.size,
                         className: modal.className,
                         close: modal.close,
-                        style: modal.style || props.modalStyle,
-                        backdropStyle: modal.backdropStyle || props.modalBackdrop,
-                        dialogStyle: modal.dialogStyle || props.modalDialog,
-                        contentStyle: modal.mcontentStyle || props.modalContent
+                        style: modal.style || props.style,
+                        backdropStyle: modal.backdropStyle || props.backdrop,
+                        dialogStyle: modal.dialogStyle || props.dialog
                     }, modal.render(modal))
                 );
             })

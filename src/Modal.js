@@ -60,7 +60,7 @@ ModalPrototype.__onResize = function() {
         height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     }
 
-    virtDOM.findDOMNode(this.refs.modalBackdrop).style.height = height + "px";
+    virtDOM.findDOMNode(this.refs.backdrop).style.height = height + "px";
 };
 
 ModalPrototype.getStyles = function() {
@@ -70,32 +70,24 @@ ModalPrototype.getStyles = function() {
                 zIndex: 1000 + props.index,
                 position: "absolute",
                 top: "0",
-                right: "0",
-                bottom: "0",
                 left: "0",
-                overflow: "hidden",
                 "-webkit-overflow-scrolling": "touch",
                 outline: "0"
             }, props.style),
-            modalBackdrop: extend({
+            backdrop: extend({
                 position: "fixed",
                 top: "0",
-                right: "0",
                 left: "0",
+                width: "100%",
+                height: "100%",
                 backgroundColor: "#000"
-            }, props.backdropStyle),
-            modalDialog: extend({
-                position: "relative",
-                width: "75%",
-                minWidth: "320px",
-                margin: "128px auto 0"
-            }, props.dialogStyle),
-            modalContent: extend({
+            }, props.backdrop),
+            dialog: extend({
                 position: "relative"
-            }, props.contentStyle)
+            }, props.dialog)
         };
 
-    css.opacity(styles.modalBackdrop, 0.5);
+    css.opacity(styles.backdrop, 0.5);
 
     return styles;
 };
@@ -111,20 +103,15 @@ ModalPrototype.render = function() {
             },
             virt.createView("div", {
                 onClick: props.close,
-                ref: "modalBackdrop",
+                ref: "backdrop",
                 className: "Modal-backdrop",
-                style: styles.modalBackdrop
+                style: styles.backdrop
             }),
             virt.createView("div", {
                     className: "Modal-dialog" + props.size,
-                    style: styles.modalDialog
+                    style: styles.dialog
                 },
-                virt.createView("div", {
-                        className: "Modal-content",
-                        style: styles.modalContent
-                    },
-                    this.children
-                )
+                this.children
             )
         )
     );
