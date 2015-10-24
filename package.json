@@ -27,19 +27,17 @@
   },
   "dependencies": {
     "css": "git://github.com/nathanfaucett/css.git",
-    "environment": "git://github.com/nathanfaucett/environment",
-    "event_emitter": "git://github.com/nathanfaucett/event_emitter",
-    "event_listener": "git://github.com/nathanfaucett/event_listener",
-    "extend": "git://github.com/nathanfaucett/extend.git",
-    "filter_one": "git://github.com/nathanfaucett/filter_one",
-    "index_of": "git://github.com/nathanfaucett/index_of",
-    "is_function": "git://github.com/nathanfaucett/is_function",
-    "is_number": "git://github.com/nathanfaucett/is_number",
-    "is_string": "git://github.com/nathanfaucett/is_string",
-    "key_mirror": "git://github.com/nathanfaucett/key_mirror",
-    "map": "git://github.com/nathanfaucett/map",
-    "prop_types": "git://github.com/nathanfaucett/prop_types",
-    "virt": "nathanfaucett/virt",
-    "virt-dom": "git://github.com/nathanfaucett/virt-dom"
+    "environment": "git://github.com/nathanfaucett/environment.git",
+    "event_emitter": "git://github.com/nathanfaucett/event_emitter.git",
+    "event_listener": "git://github.com/nathanfaucett/event_listener.git",
+    "extend": "git://github.com/nathanfaucett/extend.git.git",
+    "is_function": "git://github.com/nathanfaucett/is_function.git",
+    "is_number": "git://github.com/nathanfaucett/is_number.git",
+    "is_string": "git://github.com/nathanfaucett/is_string.git",
+    "key_mirror": "git://github.com/nathanfaucett/key_mirror.git",
+    "map": "git://github.com/nathanfaucett/map.git",
+    "prop_types": "git://github.com/nathanfaucett/prop_types.git",
+    "virt": "git://github.com/nathanfaucett/virt.git",
+    "virt-dom": "git://github.com/nathanfaucett/virt-dom.git"
   }
 }

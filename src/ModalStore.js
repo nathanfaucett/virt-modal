@@ -1,6 +1,4 @@
 var EventEmitter = require("event_emitter"),
-    indexOf = require("index_of"),
-    filterOne = require("filter_one"),
     isString = require("is_string"),
     keyMirror = require("key_mirror");
 
@@ -40,10 +38,19 @@ function create(options) {
 
 function destroy(id) {
     var modals = _modals,
-        modal = filterOne(modals, function(m) {
-            return m.id === id;
-        }),
-        index = indexOf(modals, modal);
+        i = -1,
+        il = modals.length - 1,
+        index = -1,
+        modal;
+
+    while (i++ < il) {
+        modal = modals[i];
+
+        if (modal.id === id) {
+            index = i;
+            break;
+        }
+    }
 
     if (index !== -1) {
         modals.splice(index, 1);
