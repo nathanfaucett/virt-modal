@@ -30,7 +30,7 @@
     "environment": "git://github.com/nathanfaucett/environment.git",
     "event_emitter": "git://github.com/nathanfaucett/event_emitter.git",
     "event_listener": "git://github.com/nathanfaucett/event_listener.git",
-    "extend": "git://github.com/nathanfaucett/extend.git.git",
+    "extend": "git://github.com/nathanfaucett/extend.git",
     "is_function": "git://github.com/nathanfaucett/is_function.git",
     "is_number": "git://github.com/nathanfaucett/is_number.git",
     "is_string": "git://github.com/nathanfaucett/is_string.git",
