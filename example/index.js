@@ -3843,6 +3843,8 @@ function(require, exports, module, undefined, global) {
 /* ../../node_modules/virt-dom/src/render.js */
 
 var virt = require(1),
+    isNull = require(26),
+    isUndefined = require(27),
     Adapter = require(113),
     rootsById = require(114),
     getRootNodeId = require(115);
@@ -3858,7 +3860,7 @@ function render(nextView, containerDOMNode, callback) {
     var id = getRootNodeId(containerDOMNode),
         root;
 
-    if (id === null || rootsById[id] === undefined) {
+    if (isNull(id) || isUndefined(rootsById[id])) {
         root = new Root();
         root.adapter = new Adapter(root, containerDOMNode);
         id = root.id;
@@ -3974,6 +3976,7 @@ function(require, exports, module, undefined, global) {
 /* ../../node_modules/virt-dom/src/worker/createWorkerRender.js */
 
 var Messenger = require(116),
+    isNull = require(26),
     MessengerWorkerAdapter = require(173),
     eventHandlersById = require(112),
     nativeDOMHandlers = require(74),
@@ -4007,7 +4010,7 @@ function createWorkerRender(url, containerDOMNode) {
         applyEvents(transaction.events, eventHandler);
         applyPatches(transaction.removes, containerDOMNode, document);
 
-        if (rootId === null) {
+        if (isNull(rootId)) {
             rootId = getRootNodeId(containerDOMNode);
             eventHandlersById[rootId] = eventHandler;
         }
@@ -4048,6 +4051,7 @@ function(require, exports, module, undefined, global) {
 /* ../../node_modules/virt-dom/src/worker/renderWorker.js */
 
 var virt = require(1),
+    isNull = require(26),
     rootsById = require(114),
     WorkerAdapter = require(174);
 
@@ -4059,7 +4063,7 @@ module.exports = render;
 
 
 function render(nextView, callback) {
-    if (root === null) {
+    if (isNull(root)) {
         root = new virt.Root();
         root.adapter = new WorkerAdapter(root);
         rootsById[root.id] = root;
@@ -4069,7 +4073,7 @@ function render(nextView, callback) {
 }
 
 render.unmount = function() {
-    if (root !== null) {
+    if (!isNull(root)) {
         delete rootsById[root.id];
         root.unmount();
         root = null;
@@ -4082,6 +4086,7 @@ function(require, exports, module, undefined, global) {
 /* ../../node_modules/virt-dom/src/websocket/createWebSocketRender.js */
 
 var Messenger = require(116),
+    isNull = require(26),
     MessengerWebSocketAdapter = require(175),
     eventHandlersById = require(112),
     getRootNodeId = require(115),
@@ -4114,7 +4119,7 @@ function createWebSocketRender(containerDOMNode, socket, attachMessage, sendMess
         applyEvents(transaction.events, eventHandler);
         applyPatches(transaction.removes, containerDOMNode, document);
 
-        if (rootId === null) {
+        if (isNull(rootId)) {
             rootId = getRootNodeId(containerDOMNode);
             eventHandlersById[rootId] = eventHandler;
         }
@@ -6381,6 +6386,7 @@ function(require, exports, module, undefined, global) {
 /* ../../node_modules/virt-dom/src/events/isEventSupported.js */
 
 var isFunction = require(16),
+    isNullOrUndefined = require(20),
     has = require(22),
     supports = require(132),
     environment = require(101);
@@ -6401,7 +6407,7 @@ module.exports = isEventSupported;
 function isEventSupported(eventNameSuffix, capture) {
     var isSupported, eventName, element;
 
-    if (!supports.dom || capture && document.addEventListener == null) {
+    if (!supports.dom || capture && isNullOrUndefined(document.addEventListener)) {
         return false;
     } else {
         eventName = "on" + eventNameSuffix;
@@ -8086,6 +8092,9 @@ function(require, exports, module, undefined, global) {
 /* ../../node_modules/virt-dom/src/applyPatch.js */
 
 var virt = require(1),
+    isNull = require(26),
+    isUndefined = require(27),
+    isNullOrUndefined = require(20),
     createDOMElement = require(165),
     renderMarkup = require(85),
     renderString = require(72),
@@ -8135,7 +8144,7 @@ function applyPatch(patch, DOMNode, id, document, rootDOMNode) {
 function remove(parentNode, id, index) {
     var node;
 
-    if (id === null) {
+    if (isNull(id)) {
         node = parentNode.childNodes[index];
     } else {
         node = getNodeById(id);
@@ -8210,7 +8219,7 @@ function order(parentNode, orderIndex) {
     while (i++ < length) {
         move = orderIndex[i];
 
-        if (move !== undefined && move !== i) {
+        if (!isUndefined(move) && move !== i) {
             if (reverseIndex[i] > i) {
                 insertOffset++;
             }
@@ -8227,7 +8236,7 @@ function order(parentNode, orderIndex) {
             }
         }
 
-        if (removes[i] != null) {
+        if (!isNullOrUndefined(removes[i])) {
             insertOffset++;
         }
     }
@@ -8352,6 +8361,8 @@ function(require, exports, module, undefined, global) {
 var isString = require(18),
     isObject = require(30),
     isFunction = require(16),
+    isUndefined = require(27),
+    isNullOrUndefined = require(20),
     getPrototypeOf = require(33);
 
 
@@ -8365,11 +8376,11 @@ function applyProperties(node, id, props, previous) {
         propValue = props[propKey];
 
         if (propKey !== "dangerouslySetInnerHTML" && !isFunction(propValue)) {
-            if (propValue == null && previous != null) {
+            if (isNullOrUndefined(propValue) && !isNullOrUndefined(previous)) {
                 removeProperty(node, id, previous, propKey);
             } else if (isObject(propValue)) {
                 applyObject(node, previous, propKey, propValue);
-            } else if (propValue != null && (!previous || previous[propKey] !== propValue)) {
+            } else if (!isNullOrUndefined(propValue) && (!previous || previous[propKey] !== propValue)) {
                 applyProperty(node, id, propKey, propValue);
             }
         }
@@ -8419,7 +8430,7 @@ function applyObject(node, previous, propKey, propValues) {
         for (key in propValues) {
             value = propValues[key];
 
-            if (value === undefined) {
+            if (isUndefined(value)) {
                 node.removeAttribute(key);
             } else {
                 node.setAttribute(key, value);
@@ -8429,10 +8440,9 @@ function applyObject(node, previous, propKey, propValues) {
         return;
     }
 
-    previousValue = previous ? previous[propKey] : undefined;
+    previousValue = previous ? previous[propKey] : void(0);
 
-    if (
-        previousValue != null &&
+    if (!isNullOrUndefined(previousValue) &&
         isObject(previousValue) &&
         getPrototypeOf(previousValue) !== getPrototypeOf(propValues)
     ) {
@@ -8446,11 +8456,11 @@ function applyObject(node, previous, propKey, propValues) {
         nodeProps = node[propKey] = {};
     }
 
-    replacer = propKey === "style" ? "" : undefined;
+    replacer = propKey === "style" ? "" : void(0);
 
     for (key in propValues) {
         value = propValues[key];
-        nodeProps[key] = (value === undefined) ? replacer : value;
+        nodeProps[key] = isUndefined(value) ? replacer : value;
     }
 }
 
