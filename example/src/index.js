@@ -1,9 +1,24 @@
 var virt = require("virt"),
     virtDOM = require("virt-dom"),
+    EventEmitter = require("event_emitter"),
     modal = require("../..");
 
 
-var ModalStore = modal.ModalStore;
+var dispatcher = new EventEmitter(-1),
+    application = {
+        dispatcher: dispatcher
+    },
+    ModalStore = modal.ModalStore;
+
+
+dispatcher.dispatch = function(action) {
+    dispatcher.emitArg("dispatch", action);
+};
+ModalStore.application = application;
+
+dispatcher.on("dispatch", function(action) {
+    ModalStore.handler(action);
+});
 
 
 function renderApp() {
@@ -14,11 +29,9 @@ function renderApp() {
                     cursor: "pointer"
                 },
                 onClick: function() {
-                    ModalStore.registerCallback({
-                        action: {
-                            actionType: ModalStore.consts.MODAL_OPEN,
-                            name: "modal"
-                        }
+                    dispatcher.dispatch({
+                        type: ModalStore.consts.OPEN,
+                        name: "modal"
                     });
                 }
             }, "Open Modal"),
@@ -30,11 +43,9 @@ function renderApp() {
                     modal: {
                         name: "modal",
                         onClose: function(modal) {
-                            ModalStore.registerCallback({
-                                action: {
-                                    actionType: ModalStore.consts.MODAL_CLOSE,
-                                    id: modal.id
-                                }
+                            dispatcher.dispatch({
+                                type: ModalStore.consts.CLOSE,
+                                id: modal.id
                             });
                         },
                         render: function(modal) {

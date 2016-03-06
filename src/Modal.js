@@ -1,17 +1,11 @@
 var virt = require("virt"),
-    virtDOM = require("virt-dom"),
     css = require("css"),
     extend = require("extend"),
     propTypes = require("prop_types"),
-    eventListener = require("event_listener"),
-    environment = require("environment"),
-    isNumber = require("is_number");
+    ModalStore = require("./ModalStore");
 
 
-var window = environment.window,
-    document = environment.document,
-
-    ModalPrototype;
+var ModalPrototype;
 
 
 module.exports = Modal;
@@ -22,72 +16,104 @@ function Modal(props, children, context) {
 
     virt.Component.call(this, props, children, context);
 
-    this.onResize = function(e) {
-        return _this.__onResize(e);
+    this.state = {
+        animateIn: false,
+        animateOut: false
+    };
+
+    this.onWillRemove = function() {
+        return _this.__onWillRemove();
     };
 }
 virt.Component.extend(Modal, "Modal");
 ModalPrototype = Modal.prototype;
 
 Modal.propsTypes = {
-    style: propTypes.object,
-    backdropStyle: propTypes.object,
-    dialogStyle: propTypes.object,
-    contentStyle: propTypes.object,
+    id: propTypes.string.isRequired,
     index: propTypes.number.isRequired,
     size: propTypes.string.isRequired,
     className: propTypes.string.isRequired,
-    close: propTypes.func.isRequired
+    close: propTypes.func.isRequired,
+    ms: propTypes.number,
+    style: propTypes.object,
+    backdropOpacity: propTypes.number,
+    backdropStyle: propTypes.object,
+    dialogStyle: propTypes.object,
+    contentStyle: propTypes.object
+};
+
+Modal.defaultProps = {
+    ms: 450,
+    backdropOpacity: 0.4
 };
 
 ModalPrototype.componentDidMount = function() {
-    eventListener.on(window, "resize ondeviceorientation", this.onResize);
-    this.onResize();
+    var _this = this;
+
+    ModalStore.addChangeListener(this.onWillRemove);
+    setTimeout(function onSetTimeout() {
+        _this.setState({
+            animateIn: true,
+            animateOut: false
+        });
+    }, 1);
 };
 
-ModalPrototype.componentWillUnmount = function() {
-    eventListener.off(window, "resize ondeviceorientation", this.onResize);
-};
+ModalPrototype.__onWillRemove = function() {
+    var _this = this;
 
-ModalPrototype.__onResize = function() {
-    var body = document.body,
-        html = document.documentElement,
-        height;
-
-    if (isNumber(document.height)) {
-        height = document.height;
-    } else {
-        height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-    }
-
-    virtDOM.findDOMNode(this.refs.backdrop).style.height = height + "px";
+    ModalStore.show(_this.props.id, function(error, modal) {
+        if (!error && modal.willClose) {
+            setTimeout(function onSetTimeout() {
+                _this.setState({
+                    animateIn: false,
+                    animateOut: true
+                });
+                setTimeout(function onSetTimeout() {
+                    ModalStore.application.dispatcher.dispatch({
+                        type: ModalStore.consts.CLOSE_NOW,
+                        id: _this.props.id
+                    });
+                }, _this.props.ms);
+            }, 1);
+        }
+    });
 };
 
 ModalPrototype.getStyles = function() {
     var props = this.props,
+        state = this.state,
         styles = {
-            root: extend({
+            root: {
                 zIndex: 1000 + props.index,
                 position: "absolute",
                 top: "0",
                 left: "0",
-                "-webkit-overflow-scrolling": "touch",
+                WebkitOverflowScrolling: "touch",
                 outline: "0"
-            }, props.style),
-            backdrop: extend({
+            },
+            backdrop: {
                 position: "fixed",
                 top: "0",
                 left: "0",
                 width: "100%",
                 height: "100%",
                 backgroundColor: "#000"
-            }, props.backdrop),
-            dialog: extend({
+            },
+            dialog: {
                 position: "relative"
-            }, props.dialog)
+            }
         };
 
-    css.opacity(styles.backdrop, 0.5);
+    css.transition(styles.backdrop, "opacity " + props.ms + "ms " + css.easing.inOut + " 0ms");
+
+    if (state.animateIn) {
+        css.opacity(styles.backdrop, props.backdropOpacity);
+    } else if (state.animateOut) {
+        css.opacity(styles.backdrop, 0);
+    } else {
+        css.opacity(styles.backdrop, 0);
+    }
 
     return styles;
 };
@@ -99,17 +125,17 @@ ModalPrototype.render = function() {
     return (
         virt.createView("div", {
                 className: "Modal" + props.className,
-                style: styles.root
+                style: extend(styles.root, props.style)
             },
             virt.createView("div", {
                 onClick: props.close,
                 ref: "backdrop",
                 className: "Modal-backdrop",
-                style: styles.backdrop
+                style: extend(styles.backdrop, props.backdropStyle)
             }),
             virt.createView("div", {
                     className: "Modal-dialog" + props.size,
-                    style: styles.dialog
+                    style: extend(styles.dialog, props.dialogStyle)
                 },
                 this.children
             )

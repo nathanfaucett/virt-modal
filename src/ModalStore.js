@@ -1,97 +1,100 @@
-var EventEmitter = require("event_emitter"),
-    isString = require("is_string"),
-    keyMirror = require("key_mirror");
+var apt = require("apt"),
+    has = require("has"),
+    uuid = require("uuid"),
+    values = require("values"),
+    isString = require("is_string");
 
 
-var ModalStore = module.exports = new EventEmitter(-1),
-
-    EVENT_CHANGE = "change",
-
-    consts = ModalStore.consts = keyMirror([
-        "MODAL_OPEN",
-        "MODAL_CLOSE"
-    ]),
-
-    _id = 1,
-    _modals = [];
+var Store = apt.Store,
+    ModalStorePrototype;
 
 
-function create(options) {
-    var modals = _modals,
-        index = modals.length,
-        modal;
+function ModalStore() {
 
-    modal = {};
+    Store.call(this);
 
-    modal.id = _id++;
-    modal.index = index;
-    modal.name = options.name;
-    modal.data = options.data;
-    modal.size = isString(options.size) ? " " + options.size : " md";
-    modal.className = isString(options.className) ? " " + options.className : "";
-    modal.style = options.style;
-    modal.backdrop = options.backdrop;
-    modal.dialog = options.dialog;
+    this.__modals = {};
+}
+Store.extend(ModalStore, "virt.ModalStore", [
+    "OPEN",
+    "CLOSE",
+    "CLOSE_NOW"
+]);
+ModalStorePrototype = ModalStore.prototype;
 
-    modals[index] = modal;
+function ModalData(options) {
+    this.id = uuid();
+    this.name = options.name;
+    this.data = options.data;
+    this.size = isString(options.size) ? " " + options.size : " md";
+    this.className = isString(options.className) ? " " + options.className : "";
+    this.style = options.style;
+    this.backdrop = options.backdrop;
+    this.dialog = options.dialog;
+    this.willClose = false;
 }
 
-function destroy(id) {
-    var modals = _modals,
-        i = -1,
-        il = modals.length - 1,
-        index = -1,
-        modal;
+function ModalStore_create(_this, options) {
+    var modal = new ModalData(options || {});
+    _this.__modals[modal.id] = modal;
+}
 
-    while (i++ < il) {
-        modal = modals[i];
+function ModalStore_willClose(_this, id) {
+    var modals = _this.__modals;
 
-        if (modal.id === id) {
-            index = i;
-            break;
-        }
-    }
-
-    if (index !== -1) {
-        modals.splice(index, 1);
+    if (has(modals, id)) {
+        modals[id].willClose = true;
     }
 }
 
-ModalStore.toJSON = function() {
-    return _modals.slice();
+function ModalStore_destroy(_this, id) {
+    var modals = _this.__modals;
+
+    if (has(modals, id)) {
+        delete modals[id];
+    }
+}
+
+ModalStorePrototype.toJSON = function() {
+    return this.__modals;
 };
 
-ModalStore.fromJSON = function(json) {
-    _modals = json;
+ModalStorePrototype.fromJSON = function(json) {
+    this.__modals = json;
 };
 
-ModalStore.all = function(callback) {
-    callback(undefined, _modals.slice());
+ModalStorePrototype.all = function(callback) {
+    callback(undefined, values(this.__modals));
 };
 
-ModalStore.addChangeListener = function(callback) {
-    this.on(EVENT_CHANGE, callback);
+ModalStorePrototype.show = function(id, callback) {
+    var modals = this.__modals;
+
+    if (has(modals, id)) {
+        callback(undefined, modals[id]);
+    } else {
+        callback(new Error("ModalStore show(id, callback) No Modal found with id " + id));
+    }
 };
 
-ModalStore.removeChangeListener = function(callback) {
-    this.off(EVENT_CHANGE, callback);
-};
+ModalStorePrototype.handler = function(action) {
+    var consts = this.consts;
 
-ModalStore.emitChange = function() {
-    this.emit(EVENT_CHANGE);
-};
-
-ModalStore.registerCallback = function(payload) {
-    var action = payload.action;
-
-    switch (action.actionType) {
-        case consts.MODAL_OPEN:
-            create(action);
-            ModalStore.emitChange();
+    switch (action.type) {
+        case consts.OPEN:
+            ModalStore_create(this, action);
+            this.emitChange();
             break;
-        case consts.MODAL_CLOSE:
-            destroy(action.id);
-            ModalStore.emitChange();
+        case consts.CLOSE:
+            ModalStore_willClose(this, action.id);
+            this.emitChange();
+            break;
+        case consts.CLOSE_NOW:
+            ModalStore_destroy(this, action.id);
+            this.emitChange();
             break;
     }
 };
+
+
+module.exports = new ModalStore();

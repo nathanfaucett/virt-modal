@@ -1,5 +1,5 @@
 var virt = require("virt"),
-    map = require("map"),
+    arrayMap = require("array-map"),
     extend = require("extend"),
     isFunction = require("is_function"),
     propTypes = require("prop_types"),
@@ -53,7 +53,7 @@ ModalsPrototype.__onChange = function() {
 
     ModalStore.all(function(error, modals) {
         _this.setState({
-            modals: map(modals, function(modal) {
+            modals: arrayMap(modals, function(modal) {
                 var modalProp = modalProps[modal.name],
                     renderModal = extend({}, modal),
                     render, onClose;
@@ -90,11 +90,12 @@ ModalsPrototype.render = function() {
         virt.createView("div", {
                 className: "Modals"
             },
-            map(this.state.modals, function(modal) {
+            arrayMap(this.state.modals, function(modal, index) {
                 return (
                     virt.createView(Modal, {
+                        index: index,
+                        id: modal.id,
                         key: modal.id,
-                        index: modal.index,
                         size: modal.size,
                         className: modal.className,
                         close: modal.close,
