@@ -1,7 +1,7 @@
 {
-  "name": "virt-modal",
+  "name": "@nathanfaucett/virt-modal",
   "version": "0.0.1",
-  "description": "virt Modal for the browser and node.js",
+  "description": "Modals for virt",
   "repository": {
     "type": "git",
     "url": "https://github.com/nathanfaucett/virt-modal.git"
@@ -21,24 +21,24 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "comn": "git://github.com/nathanfaucett/comn.git",
-    "event_emitter": "git://github.com/nathanfaucett/event_emitter.git",
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.11.3",
-    "grunt-jsbeautifier": "^0.2.10",
-    "virt-dom": "git://github.com/nathanfaucett/virt-dom.git"
+    "@nathanfaucett/comn": "^0.0.1",
+    "@nathanfaucett/event_emitter": "^0.0.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-jsbeautifier": "^0.2.13",
+    "@nathanfaucett/virt-dom": "^0.0.1"
   },
   "dependencies": {
-    "apt": "git://github.com/nathanfaucett/apt.git",
-    "array-map": "git://github.com/nathanfaucett/array-map.git",
-    "css": "git://github.com/nathanfaucett/css.git",
-    "extend": "git://github.com/nathanfaucett/extend.git",
-    "has": "git://github.com/nathanfaucett/has.git",
-    "is_function": "git://github.com/nathanfaucett/is_function.git",
-    "is_string": "git://github.com/nathanfaucett/is_string.git",
-    "prop_types": "git://github.com/nathanfaucett/prop_types.git",
-    "uuid": "git://github.com/nathanfaucett/uuid.git",
-    "values": "git://github.com/nathanfaucett/values.git",
-    "virt": "git://github.com/nathanfaucett/virt.git"
+    "@nathanfaucett/apt": "^0.0.1",
+    "@nathanfaucett/array-map": "^0.0.1",
+    "@nathanfaucett/css": "^0.0.1",
+    "@nathanfaucett/extend": "^0.0.1",
+    "@nathanfaucett/has": "^0.0.1",
+    "@nathanfaucett/is_function": "^0.0.1",
+    "@nathanfaucett/is_string": "^0.0.1",
+    "@nathanfaucett/prop_types": "^0.0.1",
+    "@nathanfaucett/uuid": "^0.0.1",
+    "@nathanfaucett/values": "^0.0.1",
+    "@nathanfaucett/virt": "^0.0.1"
   }
 }

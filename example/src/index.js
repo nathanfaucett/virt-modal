@@ -1,6 +1,6 @@
-var virt = require("virt"),
-    virtDOM = require("virt-dom"),
-    EventEmitter = require("event_emitter"),
+var virt = require("@nathanfaucett/virt"),
+    virtDOM = require("@nathanfaucett/virt-dom"),
+    EventEmitter = require("@nathanfaucett/event_emitter"),
     modal = require("../..");
 
 

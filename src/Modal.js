@@ -1,7 +1,7 @@
-var virt = require("virt"),
-    css = require("css"),
-    extend = require("extend"),
-    propTypes = require("prop_types"),
+var virt = require("@nathanfaucett/virt"),
+    css = require("@nathanfaucett/css"),
+    extend = require("@nathanfaucett/extend"),
+    propTypes = require("@nathanfaucett/prop_types"),
     ModalStore = require("./ModalStore");
 
 

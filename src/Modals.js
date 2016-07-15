@@ -1,8 +1,8 @@
-var virt = require("virt"),
-    arrayMap = require("array-map"),
-    extend = require("extend"),
-    isFunction = require("is_function"),
-    propTypes = require("prop_types"),
+var virt = require("@nathanfaucett/virt"),
+    arrayMap = require("@nathanfaucett/array-map"),
+    extend = require("@nathanfaucett/extend"),
+    isFunction = require("@nathanfaucett/is_function"),
+    propTypes = require("@nathanfaucett/prop_types"),
     ModalStore = require("./ModalStore"),
     Modal = require("./Modal");
 

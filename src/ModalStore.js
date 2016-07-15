@@ -1,8 +1,8 @@
-var apt = require("apt"),
-    has = require("has"),
-    uuid = require("uuid"),
-    values = require("values"),
-    isString = require("is_string");
+var apt = require("@nathanfaucett/apt"),
+    has = require("@nathanfaucett/has"),
+    uuid = require("@nathanfaucett/uuid"),
+    values = require("@nathanfaucett/values"),
+    isString = require("@nathanfaucett/is_string");
 
 
 var Store = apt.Store,
