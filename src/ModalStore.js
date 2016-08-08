@@ -44,6 +44,9 @@ function ModalStore_willClose(_this, id) {
 
     if (has(modals, id)) {
         modals[id].willClose = true;
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -52,6 +55,9 @@ function ModalStore_destroy(_this, id) {
 
     if (has(modals, id)) {
         delete modals[id];
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -86,12 +92,14 @@ ModalStorePrototype.handler = function(action) {
             this.emitChange();
             break;
         case consts.CLOSE:
-            ModalStore_willClose(this, action.id);
-            this.emitChange();
+            if (ModalStore_willClose(this, action.id)) {
+                this.emitChange();
+            }
             break;
         case consts.CLOSE_NOW:
-            ModalStore_destroy(this, action.id);
-            this.emitChange();
+            if (ModalStore_destroy(this, action.id)) {
+                this.emitChange();
+            }
             break;
     }
 };
