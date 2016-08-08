@@ -93,15 +93,18 @@ ModalsPrototype.render = function() {
             arrayMap(this.state.modals, function(modal, index) {
                 return (
                     virt.createView(Modal, {
-                        index: index,
-                        id: modal.id,
                         key: modal.id,
+                        id: modal.id,
+                        index: index,
                         size: modal.size,
                         className: modal.className,
                         close: modal.close,
+                        ms: modal.ms,
                         style: modal.style || props.style,
+                        backdropOpacity: modal.backdropOpacity,
                         backdropStyle: modal.backdropStyle || props.backdrop,
-                        dialogStyle: modal.dialogStyle || props.dialog
+                        dialogStyle: modal.dialogStyle || props.dialog,
+                        contentStyle: modal.contentStyle || props.content
                     }, modal.render(modal))
                 );
             })

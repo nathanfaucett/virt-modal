@@ -28,9 +28,12 @@ function ModalData(options) {
     this.data = options.data;
     this.size = isString(options.size) ? " " + options.size : " md";
     this.className = isString(options.className) ? " " + options.className : "";
+    this.ms = options.ms;
     this.style = options.style;
+    this.backdropOpacity = options.backdropOpacity;
     this.backdrop = options.backdrop;
     this.dialog = options.dialog;
+    this.content = options.content;
     this.willClose = false;
 }
 
