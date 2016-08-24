@@ -1,6 +1,6 @@
 {
   "name": "@nathanfaucett/virt-modal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Modals for virt",
   "repository": {
     "type": "git",
@@ -15,18 +15,18 @@
     "virt-modal.js"
   ],
   "scripts": {
-    "example": "comn -f ./example/src/index.js -o ./example/index.js"
+    "example": "comn -f ./example/src/index.js -o ./example/index.js -m"
   },
   "author": "Nathan Faucett",
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "@nathanfaucett/comn": "^0.0.1",
+    "@nathanfaucett/comn": "^0.0.11",
     "@nathanfaucett/event_emitter": "^0.0.1",
     "grunt": "^1.0.1",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-jsbeautifier": "^0.2.13",
-    "@nathanfaucett/virt-dom": "^0.0.1"
+    "@nathanfaucett/virt-dom": "^0.0.3"
   },
   "dependencies": {
     "@nathanfaucett/apt": "^0.0.1",
@@ -37,8 +37,8 @@
     "@nathanfaucett/is_function": "^0.0.1",
     "@nathanfaucett/is_string": "^0.0.1",
     "@nathanfaucett/prop_types": "^0.0.1",
-    "@nathanfaucett/uuid": "^0.0.1",
+    "@nathanfaucett/uuid": "^0.0.2",
     "@nathanfaucett/values": "^0.0.1",
-    "@nathanfaucett/virt": "^0.0.1"
+    "@nathanfaucett/virt": "^0.0.2"
   }
 }

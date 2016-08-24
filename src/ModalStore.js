@@ -23,7 +23,7 @@ Store.extend(ModalStore, "virt.ModalStore", [
 ModalStorePrototype = ModalStore.prototype;
 
 function ModalData(options) {
-    this.id = uuid();
+    this.id = uuid.v1();
     this.name = options.name;
     this.data = options.data;
     this.size = isString(options.size) ? " " + options.size : " md";
