@@ -1,5 +1,5 @@
 example
-Gruntfile.js
+taskfile.js
 node_modules
 npm-debug.log
 .npmignore
