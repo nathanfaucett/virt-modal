@@ -1,6 +1,6 @@
 {
   "name": "@nathanfaucett/virt-modal",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Modals for virt",
   "repository": {
     "type": "git",
@@ -22,9 +22,9 @@
   "readmeFilename": "README.md",
   "devDependencies": {
     "@nathanfaucett/comn": "^0.0.11",
-    "@nathanfaucett/event_emitter": "0.0.1",
-    "@nathanfaucett/task": "^0.0.5",
-    "@nathanfaucett/virt-dom": "^0.0.5",
+    "@nathanfaucett/event_emitter": "^0.0.2",
+    "@nathanfaucett/task": "^0.0.6",
+    "@nathanfaucett/virt-dom": "^0.0.12",
     "gulp-jsbeautifier": "^2.0.3",
     "gulp-jshint": "^2.0.1",
     "jshint": "^2.9.3",
@@ -36,13 +36,13 @@
     "@nathanfaucett/apt": "^0.0.1",
     "@nathanfaucett/array-map": "^0.0.1",
     "@nathanfaucett/css": "^0.0.1",
-    "@nathanfaucett/extend": "^0.0.1",
+    "@nathanfaucett/extend": "^0.0.2",
     "@nathanfaucett/has": "^0.0.1",
     "@nathanfaucett/is_function": "^0.0.1",
     "@nathanfaucett/is_string": "^0.0.1",
     "@nathanfaucett/prop_types": "^0.0.1",
     "@nathanfaucett/uuid": "^0.0.2",
     "@nathanfaucett/values": "^0.0.1",
-    "@nathanfaucett/virt": "^0.0.4"
+    "@nathanfaucett/virt": "^0.0.10"
   }
 }
