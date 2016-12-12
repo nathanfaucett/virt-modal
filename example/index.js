@@ -76,7 +76,7 @@
         }
     };
 
-    global["rVV5TIO6-UuY2-4a7O-WnbA-ucAuTC7E4L781"] = function(asyncDependencies) {
+    global["l6Vho4lG-vMqM-4oz8-z91A-DWFEWV3nc668V"] = function(asyncDependencies) {
         var i = -1,
             il = asyncDependencies.length - 1,
             dependency, index;
@@ -706,7 +706,7 @@ EventEmitter.extend = function(child) {
 
 },
 function(require, exports, module, undefined, global) {
-/*@=-@nathanfaucett/virt-modal@0.0.7/src/index.js-=@*/
+/*@=-@nathanfaucett/virt-modal@0.0.9/src/index.js-=@*/
 var modal = exports;
 
 
@@ -12426,7 +12426,7 @@ function getRootNodeInContainer(containerNode) {
 }
 },
 function(require, exports, module, undefined, global) {
-/*@=-@nathanfaucett/virt-modal@0.0.7/src/Modal.js-=@*/
+/*@=-@nathanfaucett/virt-modal@0.0.9/src/Modal.js-=@*/
 var virt = require(1),
     css = require(218),
     extend = require(27),
@@ -12573,7 +12573,7 @@ ModalPrototype.render = function() {
 };
 },
 function(require, exports, module, undefined, global) {
-/*@=-@nathanfaucett/virt-modal@0.0.7/src/Modals.js-=@*/
+/*@=-@nathanfaucett/virt-modal@0.0.9/src/Modals.js-=@*/
 var virt = require(1),
     arrayMap = require(26),
     extend = require(27),
@@ -12689,7 +12689,7 @@ ModalsPrototype.render = function() {
 };
 },
 function(require, exports, module, undefined, global) {
-/*@=-@nathanfaucett/virt-modal@0.0.7/src/ModalStore.js-=@*/
+/*@=-@nathanfaucett/virt-modal@0.0.9/src/ModalStore.js-=@*/
 var apt = require(249),
     has = require(25),
     uuid = require(134),
